@@ -10,10 +10,14 @@
     <ul id="todo-list">
       <!-- Wrap each item in the todo controller -->
       {{#each itemController='todo'}}
-        <li {{bind-attr class="isCompleted:completed:ufnky"}}>
-          <input type="checkbox" class="toggle">
-          {{input type="checkbox" class="toggle" checked=isCompleted}}
-          <label>{{title}}</label><button class="destroy"></button>
+        <li {{bind-attr class="isCompleted:completed isEditing:editing"}}>
+          {{#if isEditing}}
+            <input type="text" class="edit">
+          {{else}}
+            {{input type="checkbox" class="toggle" checked=isCompleted}}
+            <label {{action "editTodo" on="doubleClick"}}>{{title}}</label>
+            <button class="destroy"></button>
+          {{/if}}
         </li>
       {{/each}}
     </ul>
