@@ -1,3 +1,5 @@
+<!-- Context: Todos.TodosController -->
+
 <section id="todoapp">
   <header id="header">
     <h1>todos</h1>
@@ -6,20 +8,7 @@
   </header>
 
   <section id="main">
-    <ul id="todo-list">
-      <!-- Wrap each item in the todo controller -->
-      {{#each itemController='todo'}}
-        <li {{bind-attr class="isCompleted:completed isEditing:editing"}}>
-          {{#if isEditing}}
-            {{edit-todo class="edit" value=title focus-out="acceptChanges" insert-newline="acceptChanges"}}
-          {{else}}
-            {{input type="checkbox" class="toggle" checked=isCompleted}}
-            <label {{action "editTodo" on="doubleClick"}}>{{title}}</label>
-            <button {{action "removeTodo"}} class="destroy"></button>
-          {{/if}}
-        </li>
-      {{/each}}
-    </ul>
+    {{outlet}}
 
     <input type="checkbox" id="toggle-all">
   </section>

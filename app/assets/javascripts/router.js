@@ -2,5 +2,7 @@
 
 App.Router.map(function() {
   // Make `/` go to `todos` resource
-  this.resource('todos', { path: '/' })
+  this.resource('todos', { path: '/' }, function() {
+
+  });
 });
