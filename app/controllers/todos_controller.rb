@@ -29,6 +29,12 @@ class TodosController < ApplicationController
   end
 
   def destroy
+    todo = Todo.find(params[:id])
+    if todo.destroy
+      render json: { message: "Record deleted successfully!" }, status: 200
+    else
+      render json: { errors: "Something bad happened." }, status: 422
+    end
   end
 
   private
