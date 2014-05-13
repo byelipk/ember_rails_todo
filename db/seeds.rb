@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+Todo.create(title: 'Learn Ember.JS', is_completed: false)
+Todo.create(title: 'Boom Boom', is_completed: false)
+Todo.create(title: 'Be Wealthy', is_completed: false)

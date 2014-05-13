@@ -7,3 +7,7 @@ App.Store = DS.Store.extend({
 App.ApplicationAdapter = DS.ActiveModelAdapter.extend({
 
 });
+
+App.ApplicationSerializer = DS.ActiveModelSerializer.extend({
+  
+});
