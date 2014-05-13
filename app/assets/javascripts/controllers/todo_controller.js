@@ -7,6 +7,8 @@ App.TodoController = Ember.ObjectController.extend({
       this.set('isEditing', true);
     },
 
+    // For Ember event types like insertNewline and focusIn/focusOut see:
+    // http://emberjs.com/api/classes/Ember.TextSupport.html
     acceptChanges: function() {
       // Switch out of edit mode
       this.set('isEditing', false);

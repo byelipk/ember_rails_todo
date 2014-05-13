@@ -5,6 +5,8 @@ App.TodosController = Ember.ArrayController.extend({
     createTodo: function() {
       // Get todo
       var title = this.get('newTitle');
+
+      // Exit if title is empty
       if (!title.trim()) { return; }
 
       // Create new todo object
