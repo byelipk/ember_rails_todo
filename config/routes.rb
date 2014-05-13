@@ -2,7 +2,7 @@ TodoMVC::Application.routes.draw do
 
   root 'home#index'
 
-  resources :todos
+  resources :todos, only: [:index, :create, :update, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
