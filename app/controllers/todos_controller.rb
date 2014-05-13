@@ -20,6 +20,12 @@ class TodosController < ApplicationController
   end
 
   def update
+    todo = Todo.find(params[:id])
+    if todo && todo.update(todo_params)
+      render json: todo, status: 200
+    else
+      render json: { errors: "Something bad happened." }, status: 422
+    end
   end
 
   def destroy

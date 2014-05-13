@@ -3,15 +3,16 @@
     <h1>todos</h1>
     {{input type="text" id="new-todo" placeholder="What needs to be done?"
       value=newTitle action="createTodo"}}
-    {{!-- Will call action on `enter` --}}
 
   </header>
 
   <section id="main">
     <ul id="todo-list">
-      {{#each}}
+      <!-- Wrap each item in the todo controller -->
+      {{#each itemController='todo'}}
         <li {{bind-attr class="isCompleted:completed:ufnky"}}>
           <input type="checkbox" class="toggle">
+          {{input type="checkbox" class="toggle" checked=isCompleted}}
           <label>{{title}}</label><button class="destroy"></button>
         </li>
       {{/each}}
