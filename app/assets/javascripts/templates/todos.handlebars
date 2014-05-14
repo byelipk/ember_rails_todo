@@ -32,9 +32,14 @@
       </li>
     </ul>
 
-    <button id="clear-completed">
-      Clear completed (1)
-    </button>
+    {{#if hasCompleted}}
+      <!-- The `action` helper listens for click events by default. For info on
+           how to set the event to listen for see:
+           http://emberjs.com/guides/templates/actions/#toc_specifying-the-type-of-event -->
+      <button id="clear-completed" {{action "clearCompleted"}}>
+        Clear completed ({{completed}})
+      </button>
+    {{/if}}
   </footer>
 </section>
 

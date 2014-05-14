@@ -20,8 +20,31 @@ App.TodosController = Ember.ArrayController.extend({
 
       // Save todo
       todo.save(); // TODO: Handle promise that gets returned on success/failure
+    },
+
+    clearCompleted: function() {
+      // For info on the Ember.Enumerable.filterBy() see:
+      // http://emberjs.com/api/classes/Ember.Enumerable.html#method_filterBy
+      var completed = this.filterBy('isCompleted', true);
+
+      // For info on Ember.Enumerable.invoke() see:
+      // http://emberjs.com/api/classes/Ember.Enumerable.html#method_invoke
+
+      // Delete each record from the store
+      completed.invoke('deleteRecord');
+
+      // Persist those changes to the backend database
+      completed.invoke('save');
     }
   },
+
+  hasCompleted: function() {
+    return this.get('completed') > 0;
+  }.property('completed'),
+
+  completed: function() {
+    return this.filterBy('isCompleted', true).get('length');
+  }.property('@each.isCompleted'),
 
   remaining: function() {
     return this.filterBy('isCompleted', false).get('length');
