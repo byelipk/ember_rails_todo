@@ -36,7 +36,17 @@ App.TodosController = Ember.ArrayController.extend({
       // Persist those changes to the backend database
       completed.invoke('save');
     }
+
   },
+
+  allAreDone: function(key, value) {
+    // Ember.Enumerable.everyProperty() is aliased to EmberEnumerable.isEvery()
+    // which is depricated. For more info see:
+    // http://emberjs.com/api/classes/Ember.Enumerable.html#method_isEvery
+    
+    // return true if there are items in the array and if every item is completed
+    return !!this.get('length') && this.everyProperty('isCompleted', true);
+  }.property('@each.isCompleted'),
 
   hasCompleted: function() {
     return this.get('completed') > 0;

@@ -11,7 +11,8 @@
     <!-- Routes nested within the `todos` namespace will render into this outlet. -->
     {{outlet}}
 
-    <input type="checkbox" id="toggle-all">
+    <!-- `checked` is an html attribute -->
+    {{input type="checkbox" id="toggle-all" checked=allAreDone}}
   </section>
 
   <footer id="footer">
