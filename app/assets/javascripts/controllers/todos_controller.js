@@ -19,16 +19,27 @@ App.TodosController = Ember.ArrayController.extend({
       this.set('newTitle', '');
 
       // Save todo
-      todo.save(); // TODO: Handle promise that gets returned on success/failure
+      todo.save();
     },
 
+    /* @clearCompleted
+    **
+    ** ARGS
+    **  none
+    **
+    ** RETURN
+    **  this
+    **
+    ** DOCS
+    **  Ember.Enumerable.filterBy():
+    **  http://emberjs.com/api/classes/Ember.Enumerable.html#method_setEach
+    **
+    **  Ember.Enumerable.invoke():
+    **  http://emberjs.com/api/classes/Ember.Enumerable.html#method_invoke
+    */
     clearCompleted: function() {
-      // For info on the Ember.Enumerable.filterBy() see:
-      // http://emberjs.com/api/classes/Ember.Enumerable.html#method_filterBy
+      // Get an array of completed todos
       var completed = this.filterBy('isCompleted', true);
-
-      // For info on Ember.Enumerable.invoke() see:
-      // http://emberjs.com/api/classes/Ember.Enumerable.html#method_invoke
 
       // Delete each record from the store
       completed.invoke('deleteRecord');
@@ -36,16 +47,36 @@ App.TodosController = Ember.ArrayController.extend({
       // Persist those changes to the backend database
       completed.invoke('save');
     }
-
   },
 
+  /* @allAreDone
+  **
+  ** ARGS
+  **  key: name of dynamic property (i.e. allAreDone)
+  **  value: boolean
+  **
+  ** RETURN
+  **  boolean
+  **
+  ** DOCS
+  **  @Ember.Enumerable.everyProperty() aliased to EmberEnumerable.isEvery()[depricated]
+  **  http://emberjs.com/api/classes/Ember.Enumerable.html#method_isEvery
+  **
+  **  @Ember.Enumerable.setEach()
+  **  http://emberjs.com/api/classes/Ember.Enumerable.html#method_setEach
+  **/
   allAreDone: function(key, value) {
-    // Ember.Enumerable.everyProperty() is aliased to EmberEnumerable.isEvery()
-    // which is depricated. For more info see:
-    // http://emberjs.com/api/classes/Ember.Enumerable.html#method_isEvery
-    
-    // return true if there are items in the array and if every item is completed
-    return !!this.get('length') && this.everyProperty('isCompleted', true);
+    if (value === undefined) {
+      // return true if there are items in the array and if every item is completed
+      return !!this.get('length') && this.everyProperty('isCompleted', true);
+
+    } else {
+      // If `value` is defined, the user clicked on the check box!
+      this.setEach('isCompleted', value);
+      this.invoke('save');
+      return value;
+
+    }
   }.property('@each.isCompleted'),
 
   hasCompleted: function() {
