@@ -3,6 +3,7 @@
 App.TodosCompletedRoute = Ember.Route.extend({
   model: function() {
     return this.store.filter('todo', function(todo) {
+      // the callback should return a truthy value
       return todo.get('isCompleted');
     });
   },

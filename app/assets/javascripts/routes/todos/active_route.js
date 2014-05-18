@@ -5,7 +5,7 @@ App.TodosActiveRoute = Ember.Route.extend({
     // For info on DS.Store.filter see:
     // http://emberjs.com/api/data/classes/DS.Store.html#method_filter
     return this.store.filter('todo', function(todo) {
-      // We want the callback function to return `false`
+      //  the callback should return a falsy value
       return !todo.get('isCompleted');
     });
   },
