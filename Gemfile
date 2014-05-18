@@ -1,11 +1,12 @@
 source 'https://rubygems.org'
 
-group :development do
+group :development, :test do
   gem 'pry'
   gem 'pry-rails'
   gem 'pry-debugger'
   gem 'pry-stack_explorer'
   gem 'annotate'
+  gem 'qunit-rails'
 end
 
 gem 'ember-rails'
